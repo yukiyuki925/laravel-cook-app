@@ -29,8 +29,15 @@
         </div>
       </a>
       @endforeach
-      <a href="" class="text-gray-600 block text-right">すべてのレシピへ</a>
-      <h2 class="text-2xl font-bold bg-gray mb-2">人気レシピ</h2>
+      <a href="" class="text-gray-600 block text-right mr-8">すべてのレシピへ</a>
+    </div>
+    <div class="col-span-1 bg-gray ml-4">
+      <img src="/images/ad.png" alt="広告">
+    </div>
+  </div>
+  <div class="grid grid-cols-4 mt-7">
+    <div class="col-span-3 bg-white rounded p-4">
+      <h2 class="text-2xl font-bold bg-gray mb-2 ml-4">人気レシピ</h2>
       <div class="flex justify-between items-center">
         @foreach($popular as $p)
         <div class="max-12 rounded overflow-hidden shadow-lg mx-4">
@@ -42,10 +49,8 @@
         </div>
         @endforeach
       </div>
-      <a href="" class="text-gray-600 block text-right">すべての人気レシピへ ></a>
+      <a href="" class="text-gray-600 block text-right mt-6 mb-6">すべての人気レシピへ ></a>
     </div>
-    <div class="col-span-1 bg-gray ml-4">
-      1
-    </div>
+    <div class="col-span-1"></div>
   </div>
 </x-app-layout>
