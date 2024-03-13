@@ -27,9 +27,7 @@ class RecipeController extends Controller
       ->orderBy('recipes.views', 'desc')
       ->limit(2)
       ->get();
-      dd($popular);
 
-      
       return view('home', compact('recipes','popular'));
     }
     
