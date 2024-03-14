@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Category;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class RecipeController extends Controller
     public function home()
     {
       // recipesテーブルから取ってくる
-      $recipes = Recipe::select('recipes.id', 'recipes.title', 'recipes.description', 'recipes.created_at', 'recipes.image', 'users.name',\DB::raw('AVG(reviews.rating) as rating'))
+      $recipes = Recipe::select('recipes.id', 'recipes.title', 'recipes.description', 'recipes.created_at', 'recipes.image', 'users.name', DB::raw('AVG(reviews.rating) as rating'))
       ->join('users', 'users.id', '=', 'recipes.user_id')
       ->orderBy('recipes.created_at', 'desc')
       ->limit(3)
