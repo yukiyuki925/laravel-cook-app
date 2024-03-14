@@ -15,7 +15,7 @@ class RecipeController extends Controller
     public function home()
     {
       // recipesテーブルから取ってくる
-      $recipes = Recipe::select('recipes.id', 'recipes.title', 'recipes.description', 'recipes.created_at', 'recipes.image', 'users.name')
+      $recipes = Recipe::select('recipes.id', 'recipes.title', 'recipes.description', 'recipes.created_at', 'recipes.image', 'users.name',\DB::raw('AVG(reviews.rating) as rating'))
       ->join('users', 'users.id', '=', 'recipes.user_id')
       ->orderBy('recipes.created_at', 'desc')
       ->limit(3)
@@ -38,6 +38,8 @@ class RecipeController extends Controller
       // dd($filters);
       $query = Recipe::query()->select('recipes.id', 'recipes.title', 'recipes.description', 'recipes.created_at', 'recipes.image', 'recipes.views', 'users.name')
       ->join('users', 'users.id', '=', 'recipes.user_id')
+      ->leftJoin('reviews', 'reviews.recipe_id', '=', 'recipes.id')
+      ->groupBy('recipes.id')
       ->orderBy('recipes.views', 'desc');
 
       if(!empty($filters)){
@@ -47,6 +49,10 @@ class RecipeController extends Controller
           $query->whereIn('recipes.category_id', $filters['categories']);
         }
 
+        if(!empty($filters['rating'])){
+          $query->havingRaw('AVG(reviews.rating) >= ?', [$filters['rating']]);
+        }
+
         if(!empty($filters['title'])){
           // タイトルで絞り込み
           $query->where('recipes.title', 'like', '%'.$filters['title'].'%');
@@ -54,7 +60,7 @@ class RecipeController extends Controller
       }
       
       $recipes = $query->get();
-      dd($recipes);
+      // dd($recipes);
 
       $categories = Category::all(); 
 
