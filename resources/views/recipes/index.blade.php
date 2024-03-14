@@ -21,15 +21,16 @@
         <div class="mb-4 p-6 border border-gray-300">
           <label class="text-large text-gray-800">評価</label>
           <div class="ml-4 mb-2">
-            <input type="radio" name="rating" value="0" id="rating0" checked>
+            <!-- もしratingのフィルターがあったら、空文字を返す、そうでなければ ’checked'を返す -->
+            <input type="radio" name="rating" value="0" id="rating0" {{ $filters['rating'] ? '' : 'checked' }}>
             <label for="rating0">指定しない</label>
           </div>
           <div class="ml-4 mb-2">
-            <input type="radio" name="rating" value="3" id="rating3">
+            <input type="radio" name="rating" value="3" id="rating3" {{ $filters['rating'] == "3" ? 'checked' : ''}}>
             <label for="rating3">3以上</label>
           </div>
           <div class="ml-4 mb-2">
-            <input type="radio" name="rating" value="4" id="rating4">
+            <input type="radio" name="rating" value="4" id="rating4" {{ $filters['rating'] == "4" ? 'checked' : ''}}>
             <label for="rating4">4以上</label>
           </div>
         </div>
