@@ -32,12 +32,29 @@ class RecipeController extends Controller
       return view('home', compact('recipes','popular'));
     }
     
-    public function index()
+    public function index(Request $request)
     {
-      $recipes = Recipe::select('recipes.id', 'recipes.title', 'recipes.description', 'recipes.created_at', 'recipes.image', 'recipes.views', 'users.name')
+      $filters = $request->all();
+      // dd($filters);
+      $query = Recipe::query()->select('recipes.id', 'recipes.title', 'recipes.description', 'recipes.created_at', 'recipes.image', 'recipes.views', 'users.name')
       ->join('users', 'users.id', '=', 'recipes.user_id')
-      ->orderBy('recipes.views', 'desc')
-      ->get();
+      ->orderBy('recipes.views', 'desc');
+
+      if(!empty($filters)){
+        // もしカテゴリーが選択されていたら
+        if(!empty($filters['categories'])){
+          // カテゴリーで絞り込み選択したカテゴリーIDが含まれているレシピを取得
+          $query->whereIn('recipes.category_id', $filters['categories']);
+        }
+
+        if(!empty($filters['title'])){
+          // タイトルで絞り込み
+          $query->where('recipes.title', 'like', '%'.$filters['title'].'%');
+        }
+      }
+      
+      $recipes = $query->get();
+      dd($recipes);
 
       $categories = Category::all(); 
 
