@@ -18,39 +18,33 @@
         </div>
 
         <!-- 評価 -->
-        <div class="mb-4 p-6 border border-gray-600">
+        <div class="mb-4 p-6 border border-gray-300">
           <label class="text-large text-gray-800">評価</label>
-          <div>
+          <div class="ml-4 mb-2">
             <input type="radio" name="rating" value="0" id="rating0" checked>
             <label for="rating0">指定しない</label>
           </div>
-          <div>
+          <div class="ml-4 mb-2">
             <input type="radio" name="rating" value="3" id="rating3">
             <label for="rating3">3以上</label>
           </div>
-          <div>
+          <div class="ml-4 mb-2">
             <input type="radio" name="rating" value="4" id="rating4">
             <label for="rating4">4以上</label>
           </div>
         </div>
 
         <!-- カテゴリー -->
-        <div class="mb-4 p-6 border border-gray-600">
+        <div class="mb-4 p-6 border border-gray-300">
           <label class="text-large text-gray-800">カテゴリー</label>
-          <div>
-            <input type="checkbox" name="rating" value="0" id="rating0">
-            <label for="rating0">指定しない</label>
+          @foreach($categories as $category)
+          <div class="ml-4 mb-2">
+            <input type="checkbox" name="categories[]" value="{{$category['id']}}" id="category{{$category['id']}}">
+            <label for="category{{$category['id']}}">{{$category['name']}}</label>
           </div>
-          <div>
-            <input type="checkbox" name="rating" value="3" id="rating3">
-            <label for="rating3">3以上</label>
-          </div>
-          <div>
-            <input type="checkbox" name="rating" value="4" id="rating4">
-            <label for="rating4">4以上</label>
-          </div>
+          @endforeach
         </div>
-        <input type="text" name="title" value="" placeholder="レシピ名を入力" class="border border-gray-600 p-2 mb-4 w-full">
+        <input type="text" name="title" value="" placeholder="レシピ名を入力" class="border border-gray-300 p-2 mb-4 w-full">
         <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">検索</button>
       </form>
     </div>
