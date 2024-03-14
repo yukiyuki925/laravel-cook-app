@@ -5,7 +5,7 @@
       @include('recipes.partial.horizontal-card')
       @endforeach
     </div>
-    <div class="col-span-1 bg-white p-4">
+    <div class="col-span-1 bg-white p-4 h-max sticky top-4">
       <form action="{{route('recipe.index')}}" method="GET">
         <div class="flex">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -45,7 +45,10 @@
           @endforeach
         </div>
         <input type="text" name="title" value="" placeholder="レシピ名を入力" class="border border-gray-300 p-2 mb-4 w-full">
-        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">検索</button>
+        <div class="text-center">
+          <button type="submit"
+            class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">検索</button>
+        </div>
       </form>
     </div>
   </div>
