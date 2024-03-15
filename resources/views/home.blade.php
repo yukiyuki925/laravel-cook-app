@@ -15,7 +15,7 @@
     <div class="col-span-2 bg-white rounded p-4">
       <h2 class="text-2xl font-bold bg-gray mb-2">新着レシピ</h2>
       @foreach($recipes as $recipe)
-      @include('recipes.partial.horizontal-card.blade.php')
+      @include('recipes.partial.horizontal-card')
       @endforeach
       <a href="{{route('recipe.index')}}" class="text-gray-600 block text-right mr-8">すべてのレシピへ</a>
     </div>

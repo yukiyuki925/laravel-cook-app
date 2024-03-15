@@ -16,7 +16,7 @@ class RecipeController extends Controller
     public function home()
     {
       // recipesテーブルから取ってくる
-      $recipes = Recipe::select('recipes.id', 'recipes.title', 'recipes.description', 'recipes.created_at', 'recipes.image', 'users.name', DB::raw('AVG(reviews.rating) as rating'))
+      $recipes = Recipe::select('recipes.id', 'recipes.title', 'recipes.description', 'recipes.created_at', 'recipes.image', 'users.name')
       ->join('users', 'users.id', '=', 'recipes.user_id')
       ->orderBy('recipes.created_at', 'desc')
       ->limit(3)
@@ -37,7 +37,7 @@ class RecipeController extends Controller
     {
       $filters = $request->all();
       // dd($filters);
-      $query = Recipe::query()->select('recipes.id', 'recipes.title', 'recipes.description', 'recipes.created_at', 'recipes.image', 'recipes.views', 'users.name')
+      $query = Recipe::query()->select('recipes.id', 'recipes.title', 'recipes.description', 'recipes.created_at', 'recipes.image', 'recipes.views', 'users.name', DB::raw('AVG(reviews.rating) as rating'))
       ->join('users', 'users.id', '=', 'recipes.user_id')
       ->leftJoin('reviews', 'reviews.recipe_id', '=', 'recipes.id')
       ->groupBy('recipes.id')
@@ -60,7 +60,7 @@ class RecipeController extends Controller
         }
       }
       
-      $recipes = $query->get();
+      $recipes = $query->paginate(5);
       // dd($recipes);
 
       $categories = Category::all(); 
