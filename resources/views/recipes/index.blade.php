@@ -22,15 +22,18 @@
           <label class="text-large text-gray-800">評価</label>
           <div class="ml-4 mb-2">
             <!-- もしratingのフィルターがあったら、空文字を返す、そうでなければ ’checked'を返す -->
-            <input type="radio" name="rating" value="0" id="rating0" {{ $filters['rating'] ? '' : 'checked' }}>
+            <input type="radio" name="rating" value="0" id="rating0"
+              {{ ($filters['rating'] ?? null) == null ? 'checked' : '' }}>
             <label for="rating0">指定しない</label>
           </div>
           <div class="ml-4 mb-2">
-            <input type="radio" name="rating" value="3" id="rating3" {{ $filters['rating'] == "3" ? 'checked' : ''}}>
+            <input type="radio" name="rating" value="3" id="rating3"
+              {{ ($filters['rating'] ?? null) == "3" ? 'checked' : ''}}>
             <label for="rating3">3以上</label>
           </div>
           <div class="ml-4 mb-2">
-            <input type="radio" name="rating" value="4" id="rating4" {{ $filters['rating'] == "4" ? 'checked' : ''}}>
+            <input type="radio" name="rating" value="4" id="rating4"
+              {{ ($filters['rating'] ?? null) == "4" ? 'checked' : ''}}>
             <label for="rating4">4以上</label>
           </div>
         </div>
@@ -40,12 +43,15 @@
           <label class="text-large text-gray-800">カテゴリー</label>
           @foreach($categories as $category)
           <div class="ml-4 mb-2">
-            <input type="checkbox" name="categories[]" value="{{$category['id']}}" id="category{{$category['id']}}">
+            <input type="checkbox" name="categories[]" value="{{$category['id']}}" id="category{{$category['id']}}"
+              {{ (in_array($category['id'], $filters['categories'] ?? [] )) ? 'checked' : '' }}>
+            <!-- $category['id']が$filters['categories']に含まれているか判定 -->
             <label for="category{{$category['id']}}">{{$category['name']}}</label>
           </div>
           @endforeach
         </div>
-        <input type="text" name="title" value="" placeholder="レシピ名を入力" class="border border-gray-300 p-2 mb-4 w-full">
+        <input type="text" name="title" value="{{ $filters['title'] ?? '' }}" placeholder="レシピ名を入力"
+          class="border border-gray-300 p-2 mb-4 w-full">
         <div class="text-center">
           <button type="submit"
             class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">検索</button>
