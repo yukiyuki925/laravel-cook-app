@@ -1,4 +1,4 @@
-<a href=""
+<a href="{{ route('show', ['id' => $recipe['id']]) }}"
   class="flex flex-col items-center bg-white mb-6 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100">
   <img class="object-cover rounded-t-lg h-40 w-40 rounded-none rounded-l-lg" src="{{$recipe->image}}"
     alt="{{$recipe->title}}">
