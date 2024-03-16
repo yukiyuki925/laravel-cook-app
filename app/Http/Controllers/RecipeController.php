@@ -89,7 +89,7 @@ class RecipeController extends Controller
      */
     public function show(string $id)
     {
-      $recipe = Recipe::with(['ingredients', 'steps', 'reviews'])
+      $recipe = Recipe::with(['ingredients', 'steps', 'reviews', 'user'])
       ->where('recipes.id', $id)
       ->get();
       $recipe = $recipe[0];
