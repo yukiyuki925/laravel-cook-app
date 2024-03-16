@@ -10,6 +10,7 @@
         <p>{{$recipe['description]']}}</p>
         <p>ユーザー名</p>
         <h4 class="text-2xl font-bold mb-2">材料</h4>
+        {{dd($recipe)}}
       </div>
     </div>
   </div>
