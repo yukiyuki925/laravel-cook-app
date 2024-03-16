@@ -2,16 +2,16 @@
   <div class="p-4 mx-auto bg-white rounded">
     {{ Breadcrumbs::render('show', $recipe) }}
     <!-- レシピ詳細 -->
-    <div class="grid grid-cols-2 rounded border border-black">
+    <div class="grid grid-cols-2 rounded border border-gray-500 mt-4">
       <div class="col-span-1">
-        <img class="object-cover rounded-lg h-40 w-full rounded-l-lg" src="{{$recipe->image}}" alt="{{$recipe->title}}">
+        <img class="object-cover w-full aspect-square" src="{{$recipe->image}}" alt="{{$recipe->title}}">
       </div>
 
-      <div class="col-span-1">
-        <p>{{$recipe['description]']}}</p>
-        <p>{{$recipe['user']['name']}}</p>
+      <div class="col-span-1 p-4">
+        <p class="mb-4">{{$recipe['description]']}}</p>
+        <p class="mb-4 text-gray-500">{{$recipe['user']['name']}}</p>
         <h4 class="text-2xl font-bold mb-2">材料</h4>
-        <ul>
+        <ul class="text-gray-500 ml-6">
           @foreach($recipe['ingredients'] as $i)
           <li>{{$i['name']}}:{{$i['quantity']}}</li>
           @endforeach
@@ -41,7 +41,7 @@
     <p>レビューはまだありません</p>
     @endif
     @foreach($recipe['reviews'] as $r)
-    <div class="background-color rounded mb-4">
+    <div class="background-color rounded mb-4 p-4">
       <div class="flex">
         @for($i = 0; $i < $r['rating']; $i++) <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
           fill="currentColor" class="w-6 h-6 text-yellow-400">
@@ -50,7 +50,7 @@
             clip-rule="evenodd" />
           </svg>
           @endfor
-          <p>{{ $r['comment']}}</p>
+          <p class="ml-2">{{ $r['comment']}}</p>
       </div>
       <p>{{ $r['user']['name'] }}</p>
     </div>
