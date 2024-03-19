@@ -81,7 +81,8 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $posts = $request->all();
+      dd($posts);
     }
 
     /**
